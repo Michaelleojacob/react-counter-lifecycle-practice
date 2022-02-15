@@ -11,6 +11,17 @@ class Counter extends React.Component {
     this.decremement = () => this.setState({ counter: this.state.counter - 1 });
   }
 
+  // no longer a supported method
+  // static getDerivedStateFromProps(props, state) {
+  //   if (props.seed && state.seed !== props.seed) {
+  //     return {
+  //       seed: props.seed,
+  //       counter: props.seed,
+  //     };
+  //   }
+  //   return null;
+  // }
+
   componentDidMount() {
     console.log('Component Did Mount');
     console.log('-------------------');
@@ -28,11 +39,6 @@ class Counter extends React.Component {
     return true;
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('Component Did Update');
-    console.log('-------------------');
-  }
-
   componentWillUnmount() {
     console.log('Component Will Unmount');
     console.log('-------------------');
@@ -47,6 +53,10 @@ class Counter extends React.Component {
         <div className="counter">Counter: {this.state.counter}</div>
       </div>
     );
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('Component Did Update');
+    console.log('-------------------');
   }
 }
 
