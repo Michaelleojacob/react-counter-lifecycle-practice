@@ -8,13 +8,6 @@ class App extends React.Component {
       counter: 0,
       mount: true,
     };
-    this.incrementCounter = () => {
-      this.setState({ counter: this.state.counter + 1 });
-    };
-
-    this.decrementCounter = () => {
-      this.setState({ counter: this.state.counter - 1 });
-    };
 
     this.mountCounter = () => {
       this.setState({ mount: true });
@@ -36,13 +29,7 @@ class App extends React.Component {
             Unmount Counter
           </button>
         </div>
-        {this.state.mount ? (
-          <Counter
-            counter={this.state.counter}
-            incrementCounter={this.incrementCounter}
-            decrementCounter={this.decrementCounter}
-          />
-        ) : null}
+        {this.state.mount ? <Counter /> : null}
       </div>
     );
   }

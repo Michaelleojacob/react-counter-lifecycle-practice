@@ -2,14 +2,30 @@ import React from 'react';
 
 class Counter extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {};
     console.log('constructor for Counter.');
+    super(props);
+    this.state = {
+      counter: 0,
+    };
+    this.incremement = () => this.setState({ counter: this.state.counter + 1 });
+    this.decremement = () => this.setState({ counter: this.state.counter - 1 });
   }
 
   componentDidMount() {
     console.log('Component Did Mount');
     console.log('-------------------');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      nextProps.ignoreProp &&
+      this.props.ignoreProp !== nextProps.ignoreProp
+    ) {
+      console.log('Should component update - do not render');
+      return false;
+    }
+    console.log('should component update - render');
+    return true;
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -24,12 +40,11 @@ class Counter extends React.Component {
 
   render() {
     console.log('Render');
-    const { counter, incrementCounter, decrementCounter } = this.props;
     return (
       <div>
-        <button onClick={incrementCounter}>increment</button>
-        <button onClick={decrementCounter}>decrement</button>
-        <div className="counter">Counter: {counter}</div>
+        <button onClick={this.incremement}>incremement</button>
+        <button onClick={this.decremement}>decremement</button>
+        <div className="counter">Counter: {this.state.counter}</div>
       </div>
     );
   }
